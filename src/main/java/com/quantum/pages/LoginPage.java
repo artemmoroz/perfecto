@@ -34,7 +34,8 @@ public class LoginPage extends AbstractBasePage {
         return new MainPage();
     }
 
-    public void moveToSignUp() {
+    public SignUpPage moveToSignUp() {
         signUpButton.click();
+        return new SignUpPage();
     }
 }

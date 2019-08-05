@@ -4,7 +4,6 @@ import com.qmetry.qaf.automation.step.QAFTestStepProvider;
 import com.quantum.actions.PerfectoCustomActions;
 import com.quantum.pages.LoginPage;
 import com.quantum.pages.MainPage;
-import com.quantum.pages.SignUpPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
@@ -27,14 +26,9 @@ public class PerfectoSteps {
     @When("^I sigUp with name \"(.*)\", email \"(.*)\" and password \"(.*)\"$")
     public static LoginPage signUp(String userName, String userEmail, String userPassword) {
         LoginPage loginPage = new LoginPage();
-        loginPage.moveToSignUp();
-        SignUpPage signUpPage = new SignUpPage();
-        return signUpPage.register(userName, userEmail, userPassword, null);
-    }
-
-    @When("I select element \"(.*?)\"$")
-    public void selectElement(String text) {
-        PerfectoCustomActions.getInstance().getActions().clickOnText(text);
+        return loginPage
+                .moveToSignUp()
+                .register(userName, userEmail, userPassword, null);
     }
 
     @When("^I login with email \"(.*)\" and password \"(.*)\"$")
@@ -60,7 +54,6 @@ public class PerfectoSteps {
         PerfectoCustomActions.getInstance().getActions().clickOnText(expenseName);
     }
 
-
     @When("^I edit expense with head \"(.*)\", category \"(.*)\" and amount \"(\\d*)\"$")
     public static void editExpense(String head, String category, double amount) {
         MainPage mainPage = new MainPage();
@@ -68,21 +61,25 @@ public class PerfectoSteps {
         mainPage.editExpense(head, new BigDecimal(amount), category);
     }
 
-//    @When("^I attach \"(.*)\" image$")
-//    public static void attachImageToExpense(String image) {
-//      TODO not implemented. refactor after impl
-//    }
-
-
     @When("^I delete \"(.*)\" expenses$")
     public static void deleteSelectedExpenses(String expenseName) {
         MainPage mainPage = new MainPage();
         mainPage.deleteExpense(expenseName);
     }
 
+//    @When("^I attach \"(.*)\" image$")
+//    public static void attachImageToExpense(String image) {
+//      TODO not implemented. refactor after impl
+//    }
+
     @When("^I logout from app$")
     public static void logout() {
         MainPage mainPage = new MainPage();
         mainPage.logOut();
+    }
+
+    @When("I select element \"(.*?)\"$")
+    public void selectElement(String text) {
+        PerfectoCustomActions.getInstance().getActions().clickOnText(text);
     }
 }
