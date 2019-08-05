@@ -7,9 +7,6 @@ Feature: Perfecto App
     Given I start Perfecto app
 
     When I sigUp with name "<userName>", email "<userEmail>" and password "<userPassword>"
-  #  Then Toast with notification should appear
-    And I select element "OK"
-
     Then I must see text "Login"
 
     Examples: {'datafile' : 'src/main/resources/data/users.json'}

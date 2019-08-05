@@ -2,6 +2,7 @@ package com.quantum.pages;
 
 import com.qmetry.qaf.automation.ui.annotations.FindBy;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
+import com.quantum.actions.PerfectoCustomActions;
 
 /**
  * Created 26-Jul-19
@@ -37,7 +38,7 @@ public class SignUpPage extends AbstractBasePage {
         //currencySelect.click();
         //currencyList.getChids...
         registerButton.click();
-        // PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
+        PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         return new LoginPage();
     }
 
