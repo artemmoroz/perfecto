@@ -3,24 +3,26 @@
 Feature: Perfecto App
 
 #####################################################  SIGNIN   ###############################################
-  Scenario Outline: SignIn
+  Scenario Outline: SignUp
     Given I start Perfecto app
 
     When I sigUp with name "<userName>", email "<userEmail>" and password "<userPassword>"
   #  Then Toast with notification should appear
     And I select element "OK"
 
+    Then I must see text "Login"
+
     Examples: {'datafile' : 'src/main/resources/data/users.json'}
 
-########################################################  LOGIN  ####################
-#  Scenario Outline: Login
-#    Given I start Perfecto app
-#
-#    When I login with email "<userEmail>" and password "<userPassword>"
-#    #Then I must see text "Main page"
-#
-#    Examples: {'datafile' : 'src/main/resources/data/users.json'}
-#
+#######################################################  LOGIN  ####################
+  Scenario Outline: Login
+    Given I start Perfecto app
+
+    When I login with email "<userEmail>" and password "<userPassword>"
+    Then I must see text "Expenses"
+
+    Examples: {'datafile' : 'src/main/resources/data/users.json'}
+
 ######################################################  ADD EXPENSE  ####################
 #  Scenario: Add Expense
 #    Given I start Perfecto app

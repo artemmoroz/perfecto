@@ -37,6 +37,7 @@ public class SignUpPage extends AbstractBasePage {
         //currencySelect.click();
         //currencyList.getChids...
         registerButton.click();
+        // PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         return new LoginPage();
     }
 

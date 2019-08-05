@@ -9,7 +9,7 @@ import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
  * @author <a href="mailto:ArtemMoroz@coherentsolutions.com">Artem Moroz</a>
  * @version 1.0
  */
-public class ExpenseListItem implements PerfectoComponent {
+public class ExpenseListItem extends PerfectoComponent {
 
     @FindBy(locator = "main.elist.check.checkbox")
     private QAFWebElement checkbox;

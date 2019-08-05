@@ -32,7 +32,7 @@ public class MainPage extends AbstractBasePage {
     @FindBy(locator = "main.delete_expense.button")
     private QAFWebElement deleteExpense;
 
-    @FindBy(locator = " main.menu.button")
+    @FindBy(locator = "main.menu.button")
     private QAFWebElement menuButton;
 
     private Menu menu;
@@ -99,6 +99,7 @@ public class MainPage extends AbstractBasePage {
 
     public void openMenu() {
         menuButton.click();
+        System.out.println("Menu clicked");
         menu = new Menu();
     }
 
@@ -107,6 +108,7 @@ public class MainPage extends AbstractBasePage {
         if (menu == null) {
             openMenu();
         }
+        System.out.println("Try to logout");
         menu.logout();
     }
 

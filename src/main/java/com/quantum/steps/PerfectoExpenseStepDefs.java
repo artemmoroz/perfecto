@@ -1,7 +1,6 @@
 package com.quantum.steps;
 
 import com.qmetry.qaf.automation.step.CommonStep;
-import com.qmetry.qaf.automation.step.QAFTestStepProvider;
 import com.qmetry.qaf.automation.ui.webdriver.QAFExtendedWebElement;
 import com.quantum.utils.AppiumUtils;
 import com.quantum.utils.ConfigurationUtils;
@@ -20,7 +19,7 @@ import java.util.Map;
 import static com.quantum.steps.PerfectoApplicationSteps.switchToContext;
 import static com.quantum.utils.DeviceUtils.*;
 
-@QAFTestStepProvider
+//@QAFTestStepProvider
 public class PerfectoExpenseStepDefs {
 
     @Then("^I enter name to \"(.*?)\"$")
@@ -294,8 +293,8 @@ public class PerfectoExpenseStepDefs {
 			selectElement("OK");
 		}
     }
-	
-	 public void selectDate(String value) {
+
+    public void selectDate(String value) {
       selectElement(value);
       selectElement("OK");
 //        TODO add month and year
@@ -343,7 +342,7 @@ public class PerfectoExpenseStepDefs {
     public void scrollDownScreen() {
         DeviceUtils.swipe("50%,60%", "50%,20%");
     }
-	
+
     @And("I select category \"(.*?)\"$")
     public void selectCategory(String value) {
         if (AppiumUtils.getAppiumDriver() instanceof IOSDriver){

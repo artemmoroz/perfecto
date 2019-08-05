@@ -9,7 +9,7 @@ import com.quantum.components.PerfectoComponent;
  * @author <a href="mailto:ArtemMoroz@coherentsolutions.com">Artem Moroz</a>
  * @version 1.0
  */
-public abstract class PerfectoSelect implements PerfectoComponent {
+public abstract class PerfectoSelect extends PerfectoComponent {
 
     protected QAFWebElement element;
 

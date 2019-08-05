@@ -26,8 +26,15 @@ public class PerfectoSteps {
 
     @When("^I sigUp with name \"(.*)\", email \"(.*)\" and password \"(.*)\"$")
     public static LoginPage signUp(String userName, String userEmail, String userPassword) {
+        LoginPage loginPage = new LoginPage();
+        loginPage.moveToSignUp();
         SignUpPage signUpPage = new SignUpPage();
         return signUpPage.register(userName, userEmail, userPassword, null);
+    }
+
+    @When("I select element \"(.*?)\"$")
+    public void selectElement(String text) {
+        PerfectoCustomActions.getInstance().getActions().clickOnText(text);
     }
 
     @When("^I login with email \"(.*)\" and password \"(.*)\"$")
