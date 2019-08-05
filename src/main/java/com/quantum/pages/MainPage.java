@@ -43,6 +43,7 @@ public class MainPage extends AbstractBasePage {
     private AddExpensePage addExpensePage;
 
     public void addExpense(String head, BigDecimal amount, String category) {
+        addExpense.click();
         addExpensePage = new AddExpensePage();
         addExpensePage.addExpense(head, amount, null, null, category, null, null, true);
     }
