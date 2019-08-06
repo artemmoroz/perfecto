@@ -18,7 +18,7 @@ public class HybridIOSActions extends CustomActions {
 
     @Override
     public String getAppContextType() {
-        return "WEBVIEW";
+        return "NATIVE_APP";
     }
 
     @Override
