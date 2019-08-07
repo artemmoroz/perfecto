@@ -24,7 +24,7 @@ public class PerfectoSteps {
         PerfectoCustomActions.getInstance().getActions().startPerfectoApp();
     }
 
-    @When("^I sigUp with name \"(.*)\", email \"(.*)\" and password \"(.*)\"$")
+    @When("^I signUp with name \"(.*)\", email \"(.*)\" and password \"(.*)\"$")
     public static LoginPage signUp(String userName, String userEmail, String userPassword) {
         LoginPage loginPage = new LoginPage();
         loginPage.moveToSignUp();

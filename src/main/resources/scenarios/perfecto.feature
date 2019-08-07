@@ -6,7 +6,7 @@ Feature: Perfecto App
   Scenario Outline: SignUp
     Given I start Perfecto app
 
-    When I sigUp with name "<userName>", email "<userEmail>" and password "<userPassword>"
+    When I signUp with name "<userName>", email "<userEmail>" and password "<userPassword>"
     Then I must see text "Login"
 
     Examples: {'datafile' : 'src/main/resources/data/users.json'}
@@ -16,7 +16,7 @@ Feature: Perfecto App
     Given I start Perfecto app
 
     When I login with email "<userEmail>" and password "<userPassword>"
-    Then I must see text "Expenses"
+    Then I must see text "expenses"
 
     Examples: {'datafile' : 'src/main/resources/data/users.json'}
 
