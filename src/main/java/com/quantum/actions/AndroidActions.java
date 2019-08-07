@@ -27,4 +27,14 @@ public class AndroidActions extends CustomActions {
     public PerfectoSelect getSelect(QAFWebElement element) {
         return new SelectAndroid(element);
     }
+
+    @Override
+    public void waitForPresenceOfElement(QAFWebElement element) {
+
+    }
+
+    @Override
+    public void clickOnText(String text) {
+
+    }
 }

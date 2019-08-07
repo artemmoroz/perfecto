@@ -21,8 +21,19 @@ public class HybridIOSActions extends CustomActions {
         return "NATIVE_APP";
     }
 
+
     @Override
     public PerfectoSelect getSelect(QAFWebElement element) {
         return new SelectWeb(element);
+    }
+
+    @Override
+    public void waitForPresenceOfElement(QAFWebElement element) {
+
+    }
+
+    @Override
+    public void clickOnText(String text) {
+
     }
 }

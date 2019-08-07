@@ -1,5 +1,6 @@
 package com.quantum.actions;
 
+import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.step.CommonStep;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
 import com.quantum.components.select.PerfectoSelect;
@@ -20,9 +21,15 @@ import static com.quantum.utils.DeviceUtils.getQAFDriver;
  */
 public abstract class CustomActions {
 
+    public static final String WAIT = "selenium.wait.timeout";
+
     public abstract String getAppName();
 
     public abstract String getAppContextType();
+
+    public abstract void waitForPresenceOfElement(QAFWebElement element);
+
+    public abstract void clickOnText(String text);
 
     public void startPerfectoApp() {
 //        try {
@@ -51,12 +58,5 @@ public abstract class CustomActions {
     }
 
     public abstract PerfectoSelect getSelect(QAFWebElement element);
-
-    public void clickOnText(String text) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("label", text);
-        params.put("ignorecase", "nocase");
-        getQAFDriver().executeScript("mobile:button-text:click", params);
-    }
 
 }
