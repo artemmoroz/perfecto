@@ -1,8 +1,8 @@
 package com.quantum.pages;
 
-import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.ui.annotations.FindBy;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
+import com.quantum.actions.PerfectoCustomActions;
 
 /**
  * Created 26-Jul-19
@@ -23,7 +23,7 @@ public class LoginPage extends AbstractBasePage {
 
 
     public LoginPage() {
-        userEmailField.waitForPresent(ConfigurationManager.getBundle().getInt(WAIT));
+        PerfectoCustomActions.getInstance().getActions().waitForPresenceOfElement(userEmailField);
     }
 
     public MainPage login(String email, String password) {
