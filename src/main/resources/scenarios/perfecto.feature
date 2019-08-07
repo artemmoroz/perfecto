@@ -16,7 +16,7 @@ Feature: Perfecto App
     Given I start Perfecto app
 
     When I login with email "<userEmail>" and password "<userPassword>"
-    Then I must see text "expenses"
+    Then I must see text "xpenses"
 
     Examples: {'datafile' : 'src/main/resources/data/users.json'}
 
