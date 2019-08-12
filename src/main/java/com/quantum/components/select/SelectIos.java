@@ -17,10 +17,13 @@ public class SelectIos extends PerfectoSelect {
         super(element);
     }
 
+    public SelectIos() {
+
+    }
+
     @Override
     public void selectByValue(String value) {
         WebElement picker = getQAFDriver().findElementByClassName("XCUIElementTypePickerWheel");
-        //??? String name = picker.getAttribute("value");
         picker.sendKeys(value);
     }
 

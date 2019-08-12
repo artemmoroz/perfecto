@@ -17,6 +17,10 @@ public abstract class PerfectoSelect extends PerfectoComponent {
         this.element = element;
     }
 
+    public PerfectoSelect() {
+
+    }
+
     public abstract void selectByValue(String value);
 
     public abstract void selectByIndex(int index);
