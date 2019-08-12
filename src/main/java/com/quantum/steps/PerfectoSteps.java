@@ -1,14 +1,20 @@
 package com.quantum.steps;
 
+import com.qmetry.qaf.automation.step.QAFTestStep;
 import com.qmetry.qaf.automation.step.QAFTestStepProvider;
 import com.quantum.actions.PerfectoCustomActions;
 import com.quantum.pages.LoginPage;
 import com.quantum.pages.MainPage;
 import com.quantum.pages.SignUpPage;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created 31-Jul-19
@@ -43,10 +49,10 @@ public class PerfectoSteps {
         return loginPage.login(userEmail, userPassword);
     }
 
-    @When("^I add expense with head \"(.*)\", category \"(.*)\" and amount \"(\\d*)\"$")
-    public static void addExpense(String head, String category, double amount) {
+    @When("^I add expense with head \"(.*)\", category \"(.*)\", amount \"(\\d*)\" and currency \"(.*)\"$")
+    public static void addExpense(String head, String category, double amount, String currency) {
         MainPage mainPage = new MainPage();
-        mainPage.addExpense(head, new BigDecimal(amount), category);
+        mainPage.addExpense(head, new BigDecimal(amount), category, currency);
     }
 
     @When("^I save expense$")
@@ -55,17 +61,17 @@ public class PerfectoSteps {
         mainPage.saveExpense();
     }
 
-    @When("^I select \"(.*)\" expense$")
+    @Given("^I select \"(.*)\" expense$")
     public static void selectExpenseByName(String expenseName) {
         PerfectoCustomActions.getInstance().getActions().clickOnText(expenseName);
     }
 
 
-    @When("^I edit expense with head \"(.*)\", category \"(.*)\" and amount \"(\\d*)\"$")
-    public static void editExpense(String head, String category, double amount) {
+    @When("^I edit expense with head \"(.*)\", category \"(.*)\", amount \"(\\d*)\" and currency \"(.*)\"$")
+    public static void editExpense(String head, String category, double amount, String currency) {
         MainPage mainPage = new MainPage();
         //this is stub for searching elements, just search first by text
-        mainPage.editExpense(head, new BigDecimal(amount), category);
+        mainPage.editExpense(head, new BigDecimal(amount), category, currency);
     }
 
 //    @When("^I attach \"(.*)\" image$")

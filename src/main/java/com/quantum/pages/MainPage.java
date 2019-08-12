@@ -5,11 +5,12 @@ import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
 import com.quantum.actions.PerfectoCustomActions;
 import com.quantum.components.ExpenseListItem;
 import com.quantum.components.Menu;
+import com.quantum.components.select.SelectIos;
 import com.quantum.utils.AppType;
+import com.quantum.utils.DeviceUtils;
 import org.testng.Assert;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,34 +36,50 @@ public class MainPage extends AbstractBasePage {
     @FindBy(locator = "main.menu.button")
     private QAFWebElement menuButton;
 
-    private Menu menu;
+    @FindBy(locator = "main.back.button")
+    private QAFWebElement backToMainScreen;
 
+    private Menu menu;
 
     private List<ExpenseListItem> expenseListItemList;
 
     private AddExpensePage addExpensePage;
 
-    public void addExpense(String head, BigDecimal amount, String category) {
+    public void addExpense(String head, BigDecimal amount, String category, String currency) {
+        addExpense.click();
         addExpensePage = new AddExpensePage();
-        addExpensePage.addExpense(head, amount, null, null, category, null, null, true);
+        addExpensePage.addExpense(head, amount, currency, null, category, null, null, true);
     }
 
-    public void addExpense(String head, BigDecimal amount, String currency, LocalDateTime dateTime,
+    public void addExpense(String head, BigDecimal amount, String currency, List<String> dateTime,
                            String category, Boolean reccuring, String details) {
+        addExpense.click();
         addExpensePage = new AddExpensePage();
         addExpensePage.addExpense(head, amount, currency, dateTime, category,
                 reccuring, details, true);
     }
 
-    public void editExpense(String head, BigDecimal amount, String category) {
+    public void editExpense(String head, BigDecimal amount, String category, String currency) {
+        if (PerfectoCustomActions.getInstance().getType() == AppType.HYBRID_IOS) {
+            driver.findElementByXPath("//*[@label=\""+ head +"\"]").click();
+        }
         editExpense.click();
         //for now it is the same as add
-        addExpense(head, amount, category);
+        addExpensePage = new AddExpensePage();
+        addExpensePage.addExpense(head, amount, currency, null, category, null, null, true);
+        if (PerfectoCustomActions.getInstance().getType() == AppType.HYBRID_IOS) {
+            saveExpense();
+            backToMainScreen.click();
+        }
     }
 
     public void saveExpense() {
+        addExpensePage = new AddExpensePage();
+
+        //addExpensePage always null without previous line
         if (addExpensePage != null) {
             addExpensePage.saveExpense();
+            PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         } else {
             throw new IllegalStateException("Add page is not inited!");
         }
@@ -123,6 +140,8 @@ public class MainPage extends AbstractBasePage {
 
     public class AddExpensePage extends AbstractBasePage {
 
+        public static final String SCROLL_DOWN_START = "50%,60%";
+        public static final String SCROLL_DOWN_END = "50%,20%";
 
         @FindBy(locator = "main.add.head.select")
         private QAFWebElement headSelect;
@@ -130,10 +149,8 @@ public class MainPage extends AbstractBasePage {
         @FindBy(locator = "main.add.amount.field")
         private QAFWebElement amountField;
 
-
         @FindBy(locator = "main.add.currency.select")
         private QAFWebElement currencySelect;
-
 
         @FindBy(locator = "main.add.date.date")
         private QAFWebElement date;
@@ -156,20 +173,36 @@ public class MainPage extends AbstractBasePage {
         @FindBy(locator = "main.add.reset.button")
         private QAFWebElement resetButton;
 
-        public void addExpense(String head, BigDecimal amount, String currency, LocalDateTime dateTime, String category,
+        private SelectIos selector = new SelectIos();
+
+        public void addExpense(String head, BigDecimal amount, String currency, List<String> dateTime, String category,
                                Boolean reccuring, String details, boolean clickSave) {
             Assert.assertNotNull(head);
             Assert.assertNotNull(amount);
             Assert.assertNotNull(category);
 
-            headSelect.sendKeys(head); //todo change to select
+            if (PerfectoCustomActions.getInstance().getType() == AppType.HYBRID_IOS) {
+                selector.hybridIosSelectByValue("Head", head);
+                setFieldValue(amountField, amount.toPlainString());
+                selector.hybridIosSelectByValue("Currency", currency);
+                DeviceUtils.swipe(SCROLL_DOWN_START, SCROLL_DOWN_END);
+                selector.hybridIosSelectByValue("Category", category);
+
+                return;
+            }
+
+            headSelect.click();
+            selector.selectByValue(head);
             amountField.sendKeys(amount.toPlainString());
-            categorySelect.sendKeys(category);
+            categorySelect.click();
+            selector.selectByValue(category);
             if (currency != null) {
-                setFieldValue(currencySelect, currency);
+                currencySelect.click();
+                selector.selectByValue(currency);
             }
             if (dateTime != null) {
-                date.sendKeys(dateTime.toString()); //todo set format with / eg 25/07/2019
+                date.click();
+//                date.sendKeys(dateTime.toString()); //todo set format with / eg 25/07/2019 - DONE (DateParser from utils)
             }
             if (reccuring != null) {
                 recurringSwitch.sendKeys(reccuring.toString());// todo replace with click
@@ -180,10 +213,13 @@ public class MainPage extends AbstractBasePage {
             if (clickSave) {
                 saveButton.click();
             }
+
+            saveExpense();
         }
 
         public void saveExpense() {
             saveButton.click();
+            PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         }
 
         public void resetExpense() {
