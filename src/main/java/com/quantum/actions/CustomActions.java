@@ -1,17 +1,12 @@
 package com.quantum.actions;
 
-import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.step.CommonStep;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
 import com.quantum.components.select.PerfectoSelect;
 import com.quantum.pages.MainPage;
 import com.quantum.utils.DeviceUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.quantum.steps.PerfectoApplicationSteps.switchToContext;
-import static com.quantum.utils.DeviceUtils.getQAFDriver;
 
 /**
  * Created 31-Jul-19
