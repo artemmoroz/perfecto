@@ -16,28 +16,29 @@ Feature: Perfecto App
     Given I start Perfecto app
 
     When I login with email "<userEmail>" and password "<userPassword>"
-    Then I must see text "xpenses"
+    Then I must see text "Expenses"
 
     Examples: {'datafile' : 'src/main/resources/data/users.json'}
 
 ######################################################  ADD EXPENSE  ####################
-#  Scenario: Add Expense
-#    Given I start Perfecto app
-#
-#    When I add expense with head "Flight", category "Personal" and amount "200"
-#    Then I must see text "Flight"
-#    And I must see text "200"
-#
+  Scenario: Add Expense
+
+    When I add expense with head "Flight", category "Personal", amount "200" and currency "USD"
+    And I save expense
+    Then I must see text "Flight"
+    And I must see text "200"
+
 ##########################################################  EDIT EXPENSE    ####################
-#  Scenario: Edit Expense
+  #comment this case if you want to run on native ios
+  Scenario: Edit Expense
 #    Given I start Perfecto app
-#
-#    When I select "Flight" expense
-#    And I edit expense with head "Flight", category "Business" and amount "250"
-#  #  And I attach "xxx" image // not implemented
-#  #  And I save expense // not need until attachment
-#
-#    Then I must see text "250"
+
+    Given I select "Flight" expense
+    When I edit expense with head "Flight", category "Business", amount "250" and currency "AUD"
+#    And I attach "xxx" image // not implemented
+#    And I save expense // not need until attachment
+
+    Then I must see text "250"
 #
 #########################################################  DELETE EXPENSE    ####################
 #  Scenario: Delete Expense
