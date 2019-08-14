@@ -7,11 +7,11 @@
     <!-- To use actual AppiumDriver classes defined    -->
     <!-- by driverClass property in env.resources dirs -->
     <!-- Set driver.name value to perfectoDriver       -->
-    <parameter name="driver.name" value="perfectoDriver"/>
+<!--    <parameter name="driver.name" value="perfectoDriver"/>-->
 
 
     <test name="Android Perfecto Test" enabled="false">
-        <parameter name="driver.capabilities.model" value="Galaxy S.*"></parameter>
+        <parameter name="driver.capabilities.model" value="Galaxy S.*"/>
         <parameter name="env.resources" value="src/main/resources/android"/>
         <groups>
             <run>
@@ -23,11 +23,29 @@
         </classes>
     </test>
 
-    <test name="IOS Perfecto Test" enabled="true">
-        <parameter name="driver.capabilities.model" value="iPhone.*"></parameter>
+    <test name="IOS Perfecto Hybrid Test" enabled="true">
+        <parameter name="driver.capabilities.model" value="iPhone.*"/>
 
-        <parameter name="driver.capabilities.platformVersion" value="11.4.1"></parameter>
-        <parameter name="driver.capabilities.location" value="NA-US-BOS"></parameter>
+        <parameter name="driver.capabilities.platformVersion" value="11.3"/>
+        <parameter name="driver.capabilities.location" value="NA-US-BOS"/>
+        <parameter name="env.resources" value="src/main/resources/ios/hybrid"/>
+        <parameter name="appType" value="hybrid_ios"/>
+
+        <groups>
+            <run>
+                <include name="@perfecto"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.qmetry.qaf.automation.step.client.gherkin.GherkinScenarioFactory"/>
+        </classes>
+    </test>
+
+    <test name="IOS Perfecto Native Test" enabled="false">
+        <parameter name="driver.capabilities.model" value="iPhone.*"/>
+
+        <parameter name="driver.capabilities.platformVersion" value="11.4.1"/>
+        <parameter name="driver.capabilities.location" value="NA-US-BOS"/>
         <parameter name="env.resources" value="src/main/resources/ios"/>
         <parameter name="appType" value="ios"/>
 
