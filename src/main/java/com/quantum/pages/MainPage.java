@@ -79,7 +79,6 @@ public class MainPage extends AbstractBasePage {
         //addExpensePage always null without previous line
         if (addExpensePage != null) {
             addExpensePage.saveExpense();
-            PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         } else {
             throw new IllegalStateException("Add page is not inited!");
         }
@@ -140,8 +139,8 @@ public class MainPage extends AbstractBasePage {
 
     public class AddExpensePage extends AbstractBasePage {
 
-        public static final String SCROLL_DOWN_START = "50%,60%";
-        public static final String SCROLL_DOWN_END = "50%,20%";
+        static final String SCROLL_DOWN_START = "50%,60%";
+        static final String SCROLL_DOWN_END = "50%,20%";
 
         @FindBy(locator = "main.add.head.select")
         private QAFWebElement headSelect;
@@ -173,6 +172,15 @@ public class MainPage extends AbstractBasePage {
         @FindBy(locator = "main.add.reset.button")
         private QAFWebElement resetButton;
 
+        @FindBy(locator = "main.add.photos.button")
+        private QAFWebElement gallery;
+
+        @FindBy(locator = "gallery.camera_roll.button")
+        private QAFWebElement cameraRoll;
+
+        @FindBy(locator = "gallery.photo")
+        private QAFWebElement photo;
+
         private SelectIos selector = new SelectIos();
 
         public void addExpense(String head, BigDecimal amount, String currency, List<String> dateTime, String category,
@@ -201,7 +209,7 @@ public class MainPage extends AbstractBasePage {
                 selector.selectByValue(currency);
             }
             if (dateTime != null) {
-                date.click();
+//                date.click();
 //                date.sendKeys(dateTime.toString()); //todo set format with / eg 25/07/2019 - DONE (DateParser from utils)
             }
             if (reccuring != null) {
@@ -210,11 +218,19 @@ public class MainPage extends AbstractBasePage {
             if (details != null) {
                 setFieldValue(detailsTextarea, details);
             }
-            if (clickSave) {
-                saveButton.click();
-            }
+//            if (clickSave) {
+//                saveButton.click();
+//            }
+            date.click();
+            DeviceUtils.swipe(SCROLL_DOWN_START, SCROLL_DOWN_END);
+            attachImage();
+        }
 
-            saveExpense();
+        private void attachImage() {
+            attachmentButton.click();
+            gallery.click();
+            cameraRoll.click();
+            photo.click();
         }
 
         public void saveExpense() {
