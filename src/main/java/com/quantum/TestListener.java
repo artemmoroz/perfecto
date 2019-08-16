@@ -44,12 +44,6 @@ public class TestListener extends QAFTestStepAdapter {
     public void afterExecute(StepExecutionTracker stepExecutionTracker) {
         Map<String, Object> params = new HashMap<>();
         getQAFDriver().executeScript("mobile:vnetwork:stop", params);
-
-        try {
-            ReportUtils.generateTestReport(ConfigurationUtils.getBaseBundle().getPropertyValue("executionId"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
