@@ -1,20 +1,14 @@
 package com.quantum.steps;
 
-import com.qmetry.qaf.automation.step.QAFTestStep;
 import com.qmetry.qaf.automation.step.QAFTestStepProvider;
 import com.quantum.actions.PerfectoCustomActions;
 import com.quantum.pages.LoginPage;
 import com.quantum.pages.MainPage;
 import com.quantum.pages.SignUpPage;
-import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created 31-Jul-19
