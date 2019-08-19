@@ -22,24 +22,26 @@ Feature: Perfecto App
 
 ######################################################  ADD EXPENSE  ####################
   Scenario: Add Expense
-
-    When I add expense with head "Flight", category "Personal", amount "200" and currency "USD"
+#
+    When I add expense with head "Flight", category "Personal", amount "200" and currency "USD - $"
+    And I attach image
     And I save expense
     Then I must see text "Flight"
     And I must see text "200"
 
 ##########################################################  EDIT EXPENSE    ####################
-  #comment this case if you want to run on native ios
+  #comment this case if you want to run on hybrid ios
   Scenario: Edit Expense
 #    Given I start Perfecto app
 
     Given I select "Flight" expense
-    When I edit expense with head "Flight", category "Business", amount "250" and currency "AUD"
+    When I edit expense with head "Flight", category "Business", amount "250" and currency "AUD - A$"
+    And I save expense
 #    And I attach "xxx" image // not implemented
 #    And I save expense // not need until attachment
 
     Then I must see text "250"
-#
+
 #########################################################  DELETE EXPENSE    ####################
 #  Scenario: Delete Expense
 #    Given I start Perfecto app
