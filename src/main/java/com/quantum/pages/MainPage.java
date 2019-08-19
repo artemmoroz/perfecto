@@ -1,5 +1,6 @@
 package com.quantum.pages;
 
+import com.qmetry.qaf.automation.core.ConfigurationManager;
 import com.qmetry.qaf.automation.ui.annotations.FindBy;
 import com.qmetry.qaf.automation.ui.webdriver.QAFWebElement;
 import com.quantum.actions.PerfectoCustomActions;
@@ -136,6 +137,10 @@ public class MainPage extends AbstractBasePage {
 
     }
 
+    public void attachImage() {
+        addExpensePage = new AddExpensePage();
+        addExpensePage.attachImage();
+    }
 
     public class AddExpensePage extends AbstractBasePage {
 
@@ -201,7 +206,8 @@ public class MainPage extends AbstractBasePage {
 
             headSelect.click();
             selector.selectByValue(head);
-            amountField.sendKeys(amount.toPlainString());
+            setFieldValue(amountField, amount.toPlainString());
+//            amountField.sendKeys();
             categorySelect.click();
             selector.selectByValue(category);
             if (currency != null) {
@@ -222,11 +228,10 @@ public class MainPage extends AbstractBasePage {
 //                saveButton.click();
 //            }
             date.click();
-            DeviceUtils.swipe(SCROLL_DOWN_START, SCROLL_DOWN_END);
-            attachImage();
         }
 
         private void attachImage() {
+            DeviceUtils.swipe(SCROLL_DOWN_START, SCROLL_DOWN_END);
             attachmentButton.click();
             gallery.click();
             cameraRoll.click();
@@ -234,6 +239,7 @@ public class MainPage extends AbstractBasePage {
         }
 
         public void saveExpense() {
+            saveButton.waitForPresent(ConfigurationManager.getBundle().getInt("selenium.wait.timeout"));
             saveButton.click();
             PerfectoCustomActions.getInstance().getActions().clickOnText("OK");
         }
