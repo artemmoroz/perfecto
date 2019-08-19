@@ -23,7 +23,7 @@
         </classes>
     </test>
 
-    <test name="IOS Perfecto Hybrid Test" enabled="true">
+    <test name="IOS Perfecto Hybrid Test" enabled="false">
         <parameter name="driver.capabilities.model" value="iPhone.*"/>
 
         <parameter name="driver.capabilities.platformVersion" value="11.3"/>
@@ -41,13 +41,17 @@
         </classes>
     </test>
 
-    <test name="IOS Perfecto Native Test" enabled="false">
+    <test name="IOS Perfecto Native Test" enabled="true">
         <parameter name="driver.capabilities.model" value="iPhone.*"/>
 
         <parameter name="driver.capabilities.platformVersion" value="11.4.1"/>
         <parameter name="driver.capabilities.location" value="NA-US-BOS"/>
         <parameter name="env.resources" value="src/main/resources/ios"/>
         <parameter name="appType" value="ios"/>
+
+<!--        <parameter name="driver.capabilities.windTunnelPersona" value="Georgia"/>-->
+<!--        <parameter name="driver.capabilities.windTunnelOrientation" value="landscape"/>-->
+<!--        <parameter name="driver.capabilities.windTunnelVNetwork" value="3.5G HSPA Average"/>-->
 
         <groups>
             <run>
