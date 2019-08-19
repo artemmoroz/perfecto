@@ -68,10 +68,11 @@ public class PerfectoSteps {
         mainPage.editExpense(head, new BigDecimal(amount), category, currency);
     }
 
-//    @When("^I attach \"(.*)\" image$")
-//    public static void attachImageToExpense(String image) {
-//      TODO not implemented. refactor after impl
-//    }
+    @When("^I attach image$")
+    public static void attachImageToExpense() {
+        MainPage mainPage = new MainPage();
+        mainPage.attachImage();
+    }
 
 
     @When("^I delete \"(.*)\" expenses$")
